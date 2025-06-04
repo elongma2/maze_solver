@@ -83,7 +83,18 @@ class Tests(unittest.TestCase):
         # Test exit: bottom-right cell should have no bottom wall
         exit_cell = maze._Maze__cells[num_rows - 1][num_cols - 1]
         self.assertFalse(exit_cell.has_bottom_wall)
-    
+
+    def test_reset(self):
+        num_rows = 3
+        num_cols = 3
+        m1 = Maze(0,0,num_rows,num_cols,10,10)
+        for row in m1._Maze__cells:
+            for cell in row:
+                cell.visited = True
+        m1._Maze__reset_cells_visited()
+        for row in m1._Maze__cells:
+            for cell in row:
+                self.assertFalse(cell.visited)
 
 if __name__ == "__main__":
     unittest.main()
